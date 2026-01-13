@@ -1,7 +1,11 @@
+from __future__ import annotations
+
+import json
+from collections.abc import Generator
 from typing import Any, Dict, Optional, Union
 
 import httpx
-from pydantic import BaseModel, HttpUrl
+from pydantic import BaseModel
 
 from ..exceptions import HTTPException
 from ..models import *
@@ -48,12 +52,13 @@ class SyncClient(BaseModel):
             )
 
         body = None if 200 == 204 else response.json()
+
         return body
 
     def get_token_issuer__id__get(
         self,
         id: str,
-    ) -> Any:
+    ) -> ManagedTokenIssuer:
         base_url = self.base_url
         path = f"/token-issuer/{id}"
 
@@ -81,12 +86,13 @@ class SyncClient(BaseModel):
             )
 
         body = None if 200 == 204 else response.json()
-        return body
+
+        return ManagedTokenIssuer.model_validate(body) if body is not None else ManagedTokenIssuer()
 
     def delete_one_token_issuer__id__delete(
         self,
         id: str,
-    ) -> Any:
+    ) -> None:
         base_url = self.base_url
         path = f"/token-issuer/{id}"
 
@@ -114,13 +120,14 @@ class SyncClient(BaseModel):
             )
 
         body = None if 204 == 204 else response.json()
-        return body
+
+        return None
 
     def update_token_issuer__id__patch(
         self,
         id: str,
         data: UpdateTokenIssuerRequest,
-    ) -> Any:
+    ) -> ManagedTokenIssuer:
         base_url = self.base_url
         path = f"/token-issuer/{id}"
 
@@ -149,12 +156,13 @@ class SyncClient(BaseModel):
             )
 
         body = None if 200 == 204 else response.json()
-        return body
+
+        return ManagedTokenIssuer.model_validate(body) if body is not None else ManagedTokenIssuer()
 
     def create_token_issuer_post(
         self,
         data: CreateTokenIssuerRequest,
-    ) -> Any:
+    ) -> ManagedTokenIssuer:
         base_url = self.base_url
         path = f"/token-issuer"
 
@@ -183,4 +191,5 @@ class SyncClient(BaseModel):
             )
 
         body = None if 200 == 204 else response.json()
-        return body
+
+        return ManagedTokenIssuer.model_validate(body) if body is not None else ManagedTokenIssuer()
