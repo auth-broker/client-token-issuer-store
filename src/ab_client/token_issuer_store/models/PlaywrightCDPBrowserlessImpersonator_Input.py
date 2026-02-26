@@ -26,6 +26,6 @@ class PlaywrightCDPBrowserlessImpersonator_Input(BaseModel):
 
     cdp_timeout: Optional[Union[float, None]] = Field(validation_alias="cdp_timeout", default=None)
 
-    cdp_gui_service: Optional[Union[CDPGUIService, None]] = Field(validation_alias="cdp_gui_service", default=None)
+    cdp_gui_service: Optional[CDPGUIService] = Field(validation_alias="cdp_gui_service", default=None)
 
     browserless_service: BrowserlessService_Input = Field(validation_alias="browserless_service")

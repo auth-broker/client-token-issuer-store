@@ -5,7 +5,7 @@ from collections.abc import Generator
 from typing import Any, Dict, Optional, Union
 
 import httpx
-from pydantic import BaseModel
+from pydantic import BaseModel, TypeAdapter
 
 from ..exceptions import HTTPException
 from ..models import *
@@ -87,7 +87,7 @@ class SyncClient(BaseModel):
 
         body = None if 200 == 204 else response.json()
 
-        return ManagedTokenIssuer.model_validate(body) if body is not None else ManagedTokenIssuer()
+        return TypeAdapter(ManagedTokenIssuer).validate_python(body)
 
     def delete_one_token_issuer__id__delete(
         self,
@@ -157,7 +157,7 @@ class SyncClient(BaseModel):
 
         body = None if 200 == 204 else response.json()
 
-        return ManagedTokenIssuer.model_validate(body) if body is not None else ManagedTokenIssuer()
+        return TypeAdapter(ManagedTokenIssuer).validate_python(body)
 
     def create_token_issuer_post(
         self,
@@ -192,4 +192,4 @@ class SyncClient(BaseModel):
 
         body = None if 200 == 204 else response.json()
 
-        return ManagedTokenIssuer.model_validate(body) if body is not None else ManagedTokenIssuer()
+        return TypeAdapter(ManagedTokenIssuer).validate_python(body)
