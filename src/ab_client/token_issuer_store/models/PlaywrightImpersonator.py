@@ -16,4 +16,4 @@ class PlaywrightImpersonator(BaseModel):
 
     tool: Literal[ImpersonatorTool.PLAYWRIGHT] = Field(validation_alias="tool", default=ImpersonatorTool.PLAYWRIGHT)
 
-    browser_channel: Optional[str] = Field(validation_alias="browser_channel", default=None)
+    browser_channel: Optional[str] = Field(validation_alias="browser_channel", default="chrome")

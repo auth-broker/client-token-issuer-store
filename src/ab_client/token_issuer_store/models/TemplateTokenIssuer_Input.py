@@ -19,10 +19,10 @@ class TemplateTokenIssuer_Input(BaseModel):
 
     oauth2_client: Oauth2Client = Field(validation_alias="oauth2_client")
 
-    identity_provider: Optional[str] = Field(validation_alias="identity_provider", default=None)
+    identity_provider: Optional[str] = Field(validation_alias="identity_provider", default="Google")
 
-    response_type: Optional[str] = Field(validation_alias="response_type", default=None)
+    response_type: Optional[str] = Field(validation_alias="response_type", default="code")
 
-    scope: Optional[str] = Field(validation_alias="scope", default=None)
+    scope: Optional[str] = Field(validation_alias="scope", default="openid email profile")
 
     type: Literal[TokenIssuerType.TEMPLATE] = Field(validation_alias="type", default=TokenIssuerType.TEMPLATE)
